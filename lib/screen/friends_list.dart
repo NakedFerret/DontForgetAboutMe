@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
-import 'util/db.dart';
+import 'package:dont_forget_about_me/util/db.dart';
 
 class FriendsList extends StatefulWidget {
   @override
@@ -51,6 +51,13 @@ class FriendsListState extends State<FriendsList> {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text('People Important To Me'),
+        actions: <Widget>[
+          new IconButton(
+              icon: new Icon(Icons.add),
+              tooltip: 'Add a friend',
+              onPressed: () => Navigator.of(context).pushNamed('add-friend')
+          ),
+        ],
       ),
       body: _buildSuggestions(),
     );
