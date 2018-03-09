@@ -1,8 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:dont_forget_about_me/util/db.dart';
+import 'package:dont_forget_about_me/widget/long_press_detector.dart';
 
 class FriendsList extends StatefulWidget {
   @override
@@ -11,6 +10,7 @@ class FriendsList extends StatefulWidget {
 
 class FriendsListState extends State<FriendsList> {
   List<Map> _friends = new List<Map>();
+  num friendInEdit;
 
   getFriends() async {
     Database db = await getAppDb();
@@ -44,7 +44,22 @@ class FriendsListState extends State<FriendsList> {
 
           final index = i ~/ 2;
 
-          return _buildRow(index < _friends.length ? _friends[index] : null);
+          return new LongPressDetector(
+              onLongPress: (tapDetails) {
+                RelativeRect menuPosition =
+                    RelativeRect.fill.shift(tapDetails.globalPosition);
+
+                showMenu(context: context, position: menuPosition, items: [
+                  new PopupMenuItem(
+                    child: const Text('Edit'),
+                  ),
+                  new PopupMenuItem(
+                    child: const Text('Delete'),
+                  )
+                ]);
+              },
+              child:
+                  _buildRow(index < _friends.length ? _friends[index] : null));
         });
   }
 
