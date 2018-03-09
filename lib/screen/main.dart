@@ -28,28 +28,6 @@ initDb() async {
         date INTEGER
       );
     ''');
-
-    int count = Sqflite
-        .firstIntValue(await db.rawQuery("SELECT COUNT(*) FROM friends"));
-
-    // Only put in dummy data if the table is empty
-    if (count > 0) return;
-
-    await db.execute('''
-      INSERT INTO FRIENDS(name, frequency) VALUES('Spongebob', 2);
-    ''');
-
-    await db.execute('''
-      INSERT INTO FRIENDS(name, frequency) VALUES('Sandy', 2);
-    ''');
-
-    await db.execute('''
-      INSERT INTO FRIENDS(name, frequency) VALUES('Patrick', 2);
-    ''');
-
-    await db.execute('''
-      INSERT INTO FRIENDS(name, frequency) VALUES('Squidward', 2);
-    ''');
   });
 }
 
