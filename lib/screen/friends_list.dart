@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:dont_forget_about_me/util/db.dart';
@@ -15,7 +17,7 @@ class FriendsListState extends State<FriendsList> {
     List<Map> result = await db.rawQuery('SELECT * FROM friends');
 
     setState(() {
-      _friends.addAll(result);
+      _friends = result;
     });
   }
 
@@ -55,8 +57,10 @@ class FriendsListState extends State<FriendsList> {
           new IconButton(
               icon: new Icon(Icons.add),
               tooltip: 'Add a friend',
-              onPressed: () => Navigator.of(context).pushNamed('add-friend')
-          ),
+              onPressed: () async {
+                await Navigator.of(context).pushNamed('add-friend');
+                getFriends();
+              }),
         ],
       ),
       body: _buildSuggestions(),
