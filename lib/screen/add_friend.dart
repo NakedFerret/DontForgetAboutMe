@@ -50,6 +50,5 @@ class AddFriendState extends State<AddFriend> {
           ),
           padding: new EdgeInsets.all(32.0),
         ));
-
   }
 }

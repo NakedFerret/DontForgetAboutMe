@@ -55,12 +55,13 @@ class FriendsListState extends State<FriendsList> {
         title: new Text('People Important To Me'),
         actions: <Widget>[
           new IconButton(
-              icon: new Icon(Icons.add),
-              tooltip: 'Add a friend',
-              onPressed: () async {
-                await Navigator.of(context).pushNamed('add-friend');
-                getFriends();
-              }),
+            icon: new Icon(Icons.add),
+            tooltip: 'Add a friend',
+            onPressed: () async {
+              await Navigator.of(context).pushNamed('add-friend');
+              getFriends();
+            },
+          ),
         ],
       ),
       body: _buildSuggestions(),
